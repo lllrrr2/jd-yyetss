@@ -149,6 +149,9 @@ async function main() {
           fixPins.push(...run_pins.splice(run_pins.indexOf('jd_ZEIkaWUMzSEi'), 1));
           fixPins.push(...run_pins.splice(run_pins.indexOf('jd_jeBkUNcyrrhw'), 1));
           fixPins.push(...run_pins.splice(run_pins.indexOf('jd_mEhOXHcULbnI'), 1));
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_7b4a4aa14b936'), 1));
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_44c729308e3f3'), 1));
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_7eec8af7ee7e9'), 1));
           const randomPins = getRandomArrayElements(run_pins, run_pins.length);
           run_pins = [[...fixPins, ...randomPins].join(',')];
           invite_pins = run_pins;
