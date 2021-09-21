@@ -146,6 +146,9 @@ async function main() {
           run_pins = [...new Set(run_pins)];
           let fixPins = run_pins.splice(run_pins.indexOf('jd_657a2521a7f1e'), 1);
           fixPins.push(...run_pins.splice(run_pins.indexOf('jd_6c9c2c12dea5a'), 1));
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_ZEIkaWUMzSEi'), 1));
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_jeBkUNcyrrhw'), 1));
+          fixPins.push(...run_pins.splice(run_pins.indexOf('jd_mEhOXHcULbnI'), 1));
           const randomPins = getRandomArrayElements(run_pins, run_pins.length);
           run_pins = [[...fixPins, ...randomPins].join(',')];
           invite_pins = run_pins;
