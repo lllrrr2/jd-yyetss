@@ -43,10 +43,10 @@ let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
 const inviteCodes = [
-'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==',
-'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==',
-'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==',
-'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==',
+'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==@e4wKrJ_5ATJ17-cjRwy0tQ==@BbOwqhNhfOHOEnzbCsqoYw==',
+'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==@e4wKrJ_5ATJ17-cjRwy0tQ==@BbOwqhNhfOHOEnzbCsqoYw==',
+'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==@e4wKrJ_5ATJ17-cjRwy0tQ==@BbOwqhNhfOHOEnzbCsqoYw==',
+'Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog==@GHjfPzLlcY5Fzcxge_Ibaw==@0snkbzas5UAocQ8Qb257Kw==@e4wKrJ_5ATJ17-cjRwy0tQ==@IxGIsywOr-aeaH4yop3Z3g==@uq2O_PGGSOgjpZk8hMVXcg==@2a5eg72YknFD5bYxG3qPzg==@e4wKrJ_5ATJ17-cjRwy0tQ==@BbOwqhNhfOHOEnzbCsqoYw==',
 ];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.tuanIds = [];
