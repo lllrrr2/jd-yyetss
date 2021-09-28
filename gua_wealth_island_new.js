@@ -32,7 +32,7 @@ $.innerInviteList = [];
 const HelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
 
 // 热气球接客 每次运行接客次数
-let serviceNum = 20;// 每次运行接客次数
+let serviceNum = 10;// 每次运行接客次数
 if ($.isNode() && process.env.gua_wealth_island_serviceNum) {
   serviceNum = Number(process.env.gua_wealth_island_serviceNum);
 }
@@ -112,6 +112,9 @@ async function getShareCode () {
       console.log("===================================")
       if(res && res.iRet == 0){
         console.log(`助力成功: 获得${res.Data && res.Data.GuestPrizeInfo && res.Data.GuestPrizeInfo.strPrizeName || ''}`)
+      }
+      if(res.sErrMsg.indexOf('助力次数达到上限') > -1 || res.iRet === 2232 || res.sErrMsg.indexOf('助力失败') > -1){
+          break
       }else{
          console.log(JSON.stringify(res))
        }
@@ -143,9 +146,9 @@ async function run() {
     $.Biztask = []
     $.Aggrtask = []
     $.Employtask = []
-    
+
     await GetHomePageInfo()
-    
+
     if($.HomeInfo){
       $.InviteList.push($.HomeInfo.strMyShareId)
       console.log(`等级:${$.HomeInfo.dwLandLvl} 当前金币:${$.HomeInfo.ddwCoinBalance} 当前财富:${$.HomeInfo.ddwRichBalance} 助力码:${$.HomeInfo.strMyShareId}`)
@@ -161,8 +164,6 @@ async function run() {
 
     // 寻宝
     await XBDetail()
-    // 清理背包
-    await cleanbag()
     // 故事会
     await StoryInfo()
     // 建筑升级
@@ -186,6 +187,7 @@ async function run() {
     await getShareCode()
     // 日常任务、成就任务
     await UserTask()
+
   }
   catch (e) {
     console.log(e);
@@ -193,14 +195,12 @@ async function run() {
 }
 
 async function makeShareCodes(code) {
-  // return true;
+
   return new Promise(async (resolve, reject) => {
     let pin = $.cookie.match(/pt_pin=([^;]*)/)[1]
-	console.log(`cookie的名称是 ${pin}`)
+    console.log(`cookie的名称是 ${pin}`)
     pin = Md5.hashStr(pin)
-	console.log(`cookie的名称的md5是 ${pin}`)
-    //await axios.get(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}`)
-    // let xx = urlLib.parse(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}` , true)
+	  console.log(`cookie的名称的md5是 ${pin}`)
      http.get(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}`, function (res) {
       res.setEncoding('utf8');
       res.on('data', function (chunk) {
@@ -214,19 +214,6 @@ async function makeShareCodes(code) {
         }
       });
      })
-    // console.log(xx);
-
-
-      // .then(res => {
-      //   if (res.data.status === 1)
-      //     console.log('已自动提交助力码')
-      //   else
-      //     console.log('提交失败！已提交farm的cookie才可提交cfd')
-      //   resolve(200)
-      // })
-      // .catch(e => {
-      //   reject('访问助力池出错')
-      // })
   })
 }
 
@@ -475,7 +462,7 @@ async function sign(){
         }
       }
     }
-    
+
     if($.Aggrtask && $.Aggrtask.Data && $.Aggrtask.Data.Employee && $.Aggrtask.Data.Employee.EmployeeList){
         if($.Aggrtask.Data && $.Aggrtask.Data.Employee && $.Aggrtask.Data.Employee.EmployeeList){
         console.log(`\n领取邀请奖励(${$.Aggrtask.Data.Employee.EmployeeList.length || 0}/${$.Aggrtask.Data.Employee.dwNeedTotalPeople || 0})`)
@@ -666,7 +653,7 @@ async function Guide(){
         }
       }
     }
-    
+
   }catch (e) {
     $.logErr(e);
   }
@@ -828,8 +815,8 @@ async function UserTask(){
             if(res.data.prizeInfo){
               res.data.prizeInfo = $.toObj(res.data.prizeInfo)
             }
-            if(res.data.prizeInfo.ddwCoin || res.data.prizeInfo.ddwMoney){
-              console.log(`${item.taskName} 领取奖励:${res.data.prizeInfo.ddwCoin && res.data.prizeInfo.ddwCoin+'金币' || ''} ${res.data.prizeInfo.ddwMoney && res.data.prizeInfo.ddwMoney+'财富' || ''}`)
+            if(res.data.prizeInfo.ddwCoin || res.data.prizeInfo.ddwMoney || res.data.prizeInfo.strPrizeName){
+              console.log(`${item.taskName} 领取奖励:${res.data.prizeInfo.ddwCoin && ' '+res.data.prizeInfo.ddwCoin+'金币' || ''}${res.data.prizeInfo.ddwMoney && ' '+res.data.prizeInfo.ddwMoney+'财富' || ''}${res.data.prizeInfo.strPrizeName && ' '+res.data.prizeInfo.strPrizeName+'红包' || ''}`)
             }else{
               console.log(`${item.taskName} 领取奖励:`, JSON.stringify(res))
             }
@@ -839,7 +826,7 @@ async function UserTask(){
           await $.wait(1000)
         }
         if(item.dateType == 2){
-          if(item.completedTimes < item.targetTimes && ![3,6,7,8,9,10].includes(item.orderId)){
+          if(item.completedTimes < item.targetTimes && ![6,7,8,9,10].includes(item.orderId)){
             if(item.taskName.indexOf('捡贝壳') >-1 || item.taskName.indexOf('赚京币任务') >-1) continue
             let b = (item.targetTimes-item.completedTimes)
             for(i=1;b--;i++){
@@ -852,8 +839,8 @@ async function UserTask(){
               if(res.data.prizeInfo){
                 res.data.prizeInfo = $.toObj(res.data.prizeInfo)
               }
-              if(res.data.prizeInfo.ddwCoin || res.data.prizeInfo.ddwMoney){
-                console.log(`${item.taskName} 领取奖励:${res.data.prizeInfo.ddwCoin && res.data.prizeInfo.ddwCoin+'金币' || ''} ${res.data.prizeInfo.ddwMoney && res.data.prizeInfo.ddwMoney+'财富' || ''}`)
+              if(res.data.prizeInfo.ddwCoin || res.data.prizeInfo.ddwMoney || res.data.prizeInfo.strPrizeName){
+                console.log(`${item.taskName} 领取奖励:${res.data.prizeInfo.ddwCoin && ' '+res.data.prizeInfo.ddwCoin+'金币' || ''}${res.data.prizeInfo.ddwMoney && ' '+res.data.prizeInfo.ddwMoney+'财富' || ''}${res.data.prizeInfo.strPrizeName && ' '+res.data.prizeInfo.strPrizeName+'红包' || ''}`)
               }else{
                 console.log(`${item.taskName} 领取奖励:`, JSON.stringify(res))
               }
@@ -873,30 +860,6 @@ async function UserTask(){
   }catch (e) {
     $.logErr(e);
   }
-}
-
-async function cleanbag (){
-        // 清空背包
-    res = await taskGet('story/querystorageroom', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
-    let bags = []
-    for (let s of res.Data.Office) {
-      console.log(s.dwCount, s.dwType)
-      bags.push(s.dwType)
-      bags.push(s.dwCount)
-    }
-    await $.wait(1000)
-    let strTypeCnt = ''
-    for (let n = 0; n < bags.length; n++) {
-      if (n % 2 === 0)
-        strTypeCnt += `${bags[n]}:`
-      else
-        strTypeCnt += `${bags[n]}|`
-    }
-    if (bags.length !== 0) {
-      res = await taskGet('story/sellgoods', '_cfd_t,bizCode,dwEnv,dwSceneId,ptag,source,strTypeCnt,strZone',`&dwSceneId=1&strTypeCnt=${strTypeCnt}`)
-      console.log(res.Data)
-      //console.log(`卖贝壳收入 ${res.Data.ddwCoin}, ${res.Data.ddwMoney}`)
-    }
 }
 
 function printRes(res, msg=''){
