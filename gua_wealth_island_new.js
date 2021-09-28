@@ -32,7 +32,7 @@ $.innerInviteList = [];
 const HelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
 
 // 热气球接客 每次运行接客次数
-let serviceNum = 10;// 每次运行接客次数
+let serviceNum = 20;// 每次运行接客次数
 if ($.isNode() && process.env.gua_wealth_island_serviceNum) {
   serviceNum = Number(process.env.gua_wealth_island_serviceNum);
 }
@@ -113,7 +113,7 @@ async function getShareCode () {
       if(res && res.iRet == 0){
         console.log(`助力成功: 获得${res.Data && res.Data.GuestPrizeInfo && res.Data.GuestPrizeInfo.strPrizeName || ''}`)
       }
-      if(res.sErrMsg.indexOf('助力次数达到上限') > -1 || res.iRet === 2232 || res.sErrMsg.indexOf('助力失败') > -1){
+      if(res.sErrMsg.indexOf('助力次数达到上限') > -1 || res.iRet === 2232 || res.sErrMsg.indexOf('助力失败') > -1 || res == null){
           break
       }else{
          console.log(JSON.stringify(res))
