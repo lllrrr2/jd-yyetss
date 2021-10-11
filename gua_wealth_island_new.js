@@ -177,7 +177,7 @@ async function run() {
     // 导游
     await Guide()
     // 撸珍珠
-    await Pearl()
+   // await Pearl()
     // 牛牛任务
     await ActTask()
     await getShareCode()
