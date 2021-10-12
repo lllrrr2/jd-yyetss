@@ -101,7 +101,7 @@ if ($.isNode()) {
       if (cookiesArr[i]) {
         cookie = cookiesArr[i];
         $.isLogin = true;
-        $.canHelp = true;//能否参团
+        $.canHelp = false;//能否参团
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
 
         if ((cookiesArr && cookiesArr.length >= ($.tuanNum || 5)) && $.canHelp) {
