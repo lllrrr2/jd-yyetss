@@ -158,31 +158,14 @@ async function run() {
       await $.wait(1000)
     }
 
-    // 清理背包
-    await cleanbag()
-    // 故事会
-    await StoryInfo()
-    // 建筑升级
-    await buildList()
-    // 签到 邀请奖励
-    await sign()
-    // 签到-小程序
-    await signs()
-    // 捡垃圾
-    await pickshell(1)
+
     // 热气球接客
     await service(serviceNum)
-    // 倒垃圾
-    await RubbishOper()
-    // 导游
-    await Guide()
-    // 撸珍珠
-   // await Pearl()
+
     // 牛牛任务
-    await ActTask()
+
     await getShareCode()
-    // 日常任务、成就任务
-    await UserTask()
+
   }
   catch (e) {
     console.log(e);
