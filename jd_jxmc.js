@@ -15,13 +15,13 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //惊喜APP的UA。领取助力任务奖励需要惊喜APP的UA,环境变量：JX_USER_AGENT，有能力的可以填上自己的UA
 const JXUserAgent =  $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USER_AGENT : ``):``;
-$.inviteCodeList = [];
-let cookiesArr = [
+$.inviteCodeList = [
   'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcZ2hSfMeZ21eUEad5HgpK8uKNwY6NHbEmNkDFwuW07c4w',
   'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcZ2hSfMeZ21eUEad5HgpK8uWacAd8phKjA_TbqJV7Y9fg',
   'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcbvV1UyxmdrD79o7WntF5ZKd_7XK8vsHVN_Kpv1QhmqiQ',
   'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcYMIVf8wrJCGEcwjlJvMRqbcLCtm71ur8CBTYNzboJuxg'
 ];
+let cookiesArr = [];
 $.appId = 10028;
 $.helpCkList = [];
 if ($.isNode()) {
