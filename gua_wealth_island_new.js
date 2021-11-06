@@ -31,7 +31,7 @@ $.innerInviteList = [];
 const HelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
 
 // 热气球接客 每次运行接客次数
-let serviceNum = 20;// 每次运行接客次数
+let serviceNum = 1;// 每次运行接客次数
 if ($.isNode() && process.env.gua_wealth_island_serviceNum) {
   serviceNum = Number(process.env.gua_wealth_island_serviceNum);
 }
@@ -160,11 +160,11 @@ async function run() {
 
 
     // 热气球接客
-    await service(serviceNum)
+    // await service(serviceNum)
 
     // 牛牛任务
 
-    await getShareCode()
+    // await getShareCode()
 
   }
   catch (e) {
