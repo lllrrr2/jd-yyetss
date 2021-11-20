@@ -2,7 +2,6 @@
 cron "10 10,16 * * *" jd_speed_sign_Part1.js, tag:京东极速版任务1
 */
  //详细说明参考 https://github.com/ccwav/QLScript2.
-*/
 const $ = new Env('京东极速版4');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
