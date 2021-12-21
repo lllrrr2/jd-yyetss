@@ -24,7 +24,7 @@ const $ = new Env('京东赚赚');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let helpAuthor=true; // 帮助作者
+let helpAuthor = true; // 帮助作者
 const randomCount = $.isNode() ? 20 : 5;
 let jdNotify = true; // 是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
@@ -40,8 +40,8 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  `S5KkcKmtgrgWwRWe-94JT@S5KkcHWtBijyvc3-Ixqlz@S5KkcGktrrjGpc1O21q9N@S5KkcRhsepFbSIhulk6ELIQ@S5KkcRk0QplaEIRigwaYPJQ@S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg`,
-  `S5KkcKmtgrgWwRWe-94JT@S5KkcHWtBijyvc3-Ixqlz@S5KkcGktrrjGpc1O21q9N@S5KkcRhsepFbSIhulk6ELIQ@S5KkcRk0QplaEIRigwaYPJQ@S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg`,
+ `S5KkcKmtgrgWwRWe-94JT@S5KkcHWtBijyvc3-Ixqlz@S5KkcGktrrjGpc1O21q9N@S5KkcRhsepFbSIhulk6ELIQ@S5KkcRk0QplaEIRigwaYPJQ@S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg`,
+ `S5KkcKmtgrgWwRWe-94JT@S5KkcHWtBijyvc3-Ixqlz@S5KkcGktrrjGpc1O21q9N@S5KkcRhsepFbSIhulk6ELIQ@S5KkcRk0QplaEIRigwaYPJQ@S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg`,
 ]
 let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000);
 !(async () => {
@@ -93,21 +93,18 @@ async function jdWish() {
   $.assistStatus = 0;
   await getTaskList(true)
 
-  await helpFriends()
+  // await helpFriends()
   await getUserInfo()
   $.nowBean = parseInt($.totalBeanNum)
   $.nowNum = parseInt($.totalNum)
   for (let i = 0; i < $.taskList.length; ++i) {
     let task = $.taskList[i]
-    if (task['taskId'] === 1 && task['status'] !== 2) {
+    if (task['taskId'] !== 3 && task['status'] !== 2) {
       console.log(`去做任务：${task.taskName}`)
-      await doTask({"taskId": task['taskId'],"mpVersion":"3.4.0"})
-    } else if (task['taskId'] !== 3 && task['status'] !== 2) {
-      console.log(`去做任务：${task.taskName}`)
-      if(task['itemId'])
-        await doTask({"itemId":task['itemId'],"taskId":task['taskId'],"mpVersion":"3.4.0"})
+      if (task['itemId'])
+        await doTask({ "itemId": task['itemId'], "taskId": task['taskId'], "taskToken": task["taskToken"], "mpVersion": "3.4.0" })
       else
-        await doTask({"taskId": task['taskId'],"mpVersion":"3.4.0"})
+        await doTask({ "taskId": task['taskId'], "taskToken": task["taskToken"], "mpVersion": "3.4.0" })
       await $.wait(3000)
     }
   }
@@ -168,11 +165,14 @@ function getTaskList(flag = false) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            $.taskList = data.data.taskDetailResList
             $.totalNum = data.data.totalNum
+            $.taskList = data?.data?.taskDetailResList ?? []
+            if (data.data.signTaskRes) {
+              $.taskList.push(data.data.signTaskRes)
+            }
             $.totalBeanNum = data.data.totalBeanNum
-            if (flag && $.taskList.filter(item => !!item && item['taskId']=== 3) && $.taskList.filter(item => !!item && item['taskId']=== 3).length) {
-              console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.taskList.filter(item => !!item && item['taskId']=== 3)[0]['itemId']}\n`);
+            if (flag && $.taskList.filter(item => !!item && item['taskId'] === 3) && $.taskList.filter(item => !!item && item['taskId'] === 3).length) {
+              console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.taskList.filter(item => !!item && item['taskId'] === 3)[0]['itemId']}\n`);
             }
           }
         }
@@ -228,7 +228,7 @@ async function helpFriends() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `https://code.chiang.fun/api/v1/jd/jdzz/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: `https://code.1.fun/api/v1/jd/jdzz/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
