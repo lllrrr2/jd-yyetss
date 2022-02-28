@@ -300,7 +300,7 @@ async function slaveHelp() {
     } else {
       console.log(`助力好友结果: ${response.message}`);
     }
-    await $.wait(2000)
+    await $.wait(4000)
   }
   if (helpPeoples && helpPeoples.length > 0) {
     message += `【您助力的好友】${helpPeoples.substr(0, helpPeoples.length - 1)}\n`;
