@@ -38,7 +38,7 @@ let shareCodes = [ // 这个列表填入你要助力的好友的shareCode
  '64304080a2714e1cac59af03b0009581@e9333dbf9c294ad6af2792dacc236fe7@f6f58dc91bad4e24b9dd6f9a1ba19950@4f53be3edea541268b1b948456d6ff4e@c298dcf3f6e34d4daadc619022ad3812@ceffcfd7afee4553999b660982e45275@010abbafb641440ca25a5bd8f23ec477@8ab904ca73c74eb4a94206b87f5c3a99@4f205d80700c4591a1484b739503e4b7',
 ]
 let message = '', subTitle = '', option = {}, isFruitFinished = false;
-const retainWater = 100;//保留水滴大于多少g,默认100g;
+const retainWater = 9000;//保留水滴大于多少g,默认100g;
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
 let jdFruitBeanCard = false;//农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
 let randomCount = $.isNode() ? 20 : 5;
