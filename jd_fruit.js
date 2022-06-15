@@ -403,24 +403,24 @@ async function doTenWaterAgain() {
   let overageEnergy = totalEnergy - retainWater;
   if (totalEnergy >= ($.farmInfo.farmUserPro.treeTotalEnergy - $.farmInfo.farmUserPro.treeEnergy)) {
     //如果现有的水滴，大于水果可兑换所需的对滴(也就是把水滴浇完，水果就能兑换了)
-  //  isFruitFinished = false;
-  //  for (let i = 0; i < ($.farmInfo.farmUserPro.treeTotalEnergy - $.farmInfo.farmUserPro.treeEnergy) / 10; i++) {
-  //    await waterGoodForFarm();
-  //    console.log(`本次浇水结果(水果马上就可兑换了):   ${JSON.stringify($.waterResult)}`);
-  //    if ($.waterResult.code === '0') {
-  //      console.log('\n浇水10g成功\n');
-  //      if ($.waterResult.finished) {
+   /* isFruitFinished = false;
+    for (let i = 0; i < ($.farmInfo.farmUserPro.treeTotalEnergy - $.farmInfo.farmUserPro.treeEnergy) / 10; i++) {
+      await waterGoodForFarm();
+      console.log(`本次浇水结果(水果马上就可兑换了):   ${JSON.stringify($.waterResult)}`);
+      if ($.waterResult.code === '0') {
+        console.log('\n浇水10g成功\n');
+        if ($.waterResult.finished) {
           // 已证实，waterResult.finished为true，表示水果可以去领取兑换了
- //         isFruitFinished = true;
-//          break
- //       } else {
- //         console.log(`目前水滴【${$.waterResult.totalEnergy}】g,继续浇水，水果马上就可以兑换了`)
+          isFruitFinished = true;
+          break
+        } else {
+          console.log(`目前水滴【${$.waterResult.totalEnergy}】g,继续浇水，水果马上就可以兑换了`)
         }
- //     } else {
- //       console.log('浇水出现失败异常,跳出不在继续浇水')
- //       break;
-//      }
- //   }
+      } else {
+        console.log('浇水出现失败异常,跳出不在继续浇水')
+        break;
+      }
+    }*/
     if (isFruitFinished) {
       option['open-url'] = urlSchema;
       $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
