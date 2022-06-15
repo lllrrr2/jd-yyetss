@@ -38,7 +38,7 @@ let shareCodes = [ // 这个列表填入你要助力的好友的shareCode
  '64304080a2714e1cac59af03b0009581@e9333dbf9c294ad6af2792dacc236fe7@f6f58dc91bad4e24b9dd6f9a1ba19950@4f53be3edea541268b1b948456d6ff4e@c298dcf3f6e34d4daadc619022ad3812@ceffcfd7afee4553999b660982e45275@010abbafb641440ca25a5bd8f23ec477@b6fc2988ac6740f092a2ee3da40ebd74@674922141a014f13bdd882e8b5c15916@8ab904ca73c74eb4a94206b87f5c3a99@4f205d80700c4591a1484b739503e4b7',
 ]
 let message = '', subTitle = '', option = {}, isFruitFinished = false;
-const retainWater = 30000;//保留水滴大于多少g,默认100g;
+const retainWater = 50000;//保留水滴大于多少g,默认100g;
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
 let jdFruitBeanCard = false;//农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
 let randomCount = $.isNode() ? 20 : 5;
@@ -403,24 +403,24 @@ async function doTenWaterAgain() {
   let overageEnergy = totalEnergy - retainWater;
   if (totalEnergy >= ($.farmInfo.farmUserPro.treeTotalEnergy - $.farmInfo.farmUserPro.treeEnergy)) {
     //如果现有的水滴，大于水果可兑换所需的对滴(也就是把水滴浇完，水果就能兑换了)
-    isFruitFinished = false;
-    for (let i = 0; i < ($.farmInfo.farmUserPro.treeTotalEnergy - $.farmInfo.farmUserPro.treeEnergy) / 10; i++) {
-      await waterGoodForFarm();
-      console.log(`本次浇水结果(水果马上就可兑换了):   ${JSON.stringify($.waterResult)}`);
-      if ($.waterResult.code === '0') {
-        console.log('\n浇水10g成功\n');
-        if ($.waterResult.finished) {
+  //  isFruitFinished = false;
+  //  for (let i = 0; i < ($.farmInfo.farmUserPro.treeTotalEnergy - $.farmInfo.farmUserPro.treeEnergy) / 10; i++) {
+  //    await waterGoodForFarm();
+  //    console.log(`本次浇水结果(水果马上就可兑换了):   ${JSON.stringify($.waterResult)}`);
+  //    if ($.waterResult.code === '0') {
+  //      console.log('\n浇水10g成功\n');
+  //      if ($.waterResult.finished) {
           // 已证实，waterResult.finished为true，表示水果可以去领取兑换了
-          isFruitFinished = true;
-          break
-        } else {
-          console.log(`目前水滴【${$.waterResult.totalEnergy}】g,继续浇水，水果马上就可以兑换了`)
+ //         isFruitFinished = true;
+//          break
+ //       } else {
+ //         console.log(`目前水滴【${$.waterResult.totalEnergy}】g,继续浇水，水果马上就可以兑换了`)
         }
-      } else {
-        console.log('浇水出现失败异常,跳出不在继续浇水')
-        break;
-      }
-    }
+ //     } else {
+ //       console.log('浇水出现失败异常,跳出不在继续浇水')
+ //       break;
+//      }
+ //   }
     if (isFruitFinished) {
       option['open-url'] = urlSchema;
       $.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
