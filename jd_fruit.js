@@ -1047,8 +1047,8 @@ async function gotStageAwardForFarm(type) {
 }
 //浇水API
 async function waterGoodForFarm() {
-  await $.wait(1000);
-  console.log('等待了1秒');
+  await $.wait(6000);
+  console.log('等待了6秒');
 
   const functionId = arguments.callee.name.toString();
   $.waterResult = await request(functionId);
@@ -1058,8 +1058,8 @@ async function initForTurntableFarm() {
   $.initForTurntableFarmRes = await request(arguments.callee.name.toString(), {version: 4, channel: 1});
 }
 async function lotteryForTurntableFarm() {
-  await $.wait(2000);
-  console.log('等待了2秒');
+  await $.wait(5000);
+  console.log('等待了5秒');
   $.lotteryRes = await request(arguments.callee.name.toString(), {type: 1, version: 4, channel: 1});
 }
 
