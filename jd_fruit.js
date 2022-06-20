@@ -33,12 +33,12 @@ let cookiesArr = [], cookie = '', jdFruitShareArr = [], isBox = false, notify, n
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // 这个列表填入你要助力的好友的shareCode
   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
- '64304080a2714e1cac59af03b0009581@e9333dbf9c294ad6af2792dacc236fe7@f6f58dc91bad4e24b9dd6f9a1ba19950@4f53be3edea541268b1b948456d6ff4e@c298dcf3f6e34d4daadc619022ad3812@ceffcfd7afee4553999b660982e45275@010abbafb641440ca25a5bd8f23ec477@b6fc2988ac6740f092a2ee3da40ebd74@674922141a014f13bdd882e8b5c15916@282db86a2e9b494d918563ed78125377@a977bcdcb8a2410b8a8db8c2826e05e7@5935fea0d65346adac6215bab9e1bcbb@8ab904ca73c74eb4a94206b87f5c3a99@4f205d80700c4591a1484b739503e4b7',
+ '64304080a2714e1cac59af03b0009581@e9333dbf9c294ad6af2792dacc236fe7@f6f58dc91bad4e24b9dd6f9a1ba19950@4f53be3edea541268b1b948456d6ff4e@ceffcfd7afee4553999b660982e45275@010abbafb641440ca25a5bd8f23ec477@b6fc2988ac6740f092a2ee3da40ebd74@674922141a014f13bdd882e8b5c15916@282db86a2e9b494d918563ed78125377@a977bcdcb8a2410b8a8db8c2826e05e7@5935fea0d65346adac6215bab9e1bcbb@8ab904ca73c74eb4a94206b87f5c3a99@4f205d80700c4591a1484b739503e4b7',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
- '64304080a2714e1cac59af03b0009581@e9333dbf9c294ad6af2792dacc236fe7@f6f58dc91bad4e24b9dd6f9a1ba19950@4f53be3edea541268b1b948456d6ff4e@c298dcf3f6e34d4daadc619022ad3812@ceffcfd7afee4553999b660982e45275@010abbafb641440ca25a5bd8f23ec477@b6fc2988ac6740f092a2ee3da40ebd74@674922141a014f13bdd882e8b5c15916@282db86a2e9b494d918563ed78125377@a977bcdcb8a2410b8a8db8c2826e05e7@5935fea0d65346adac6215bab9e1bcbb@8ab904ca73c74eb4a94206b87f5c3a99@4f205d80700c4591a1484b739503e4b7',
+ '64304080a2714e1cac59af03b0009581@e9333dbf9c294ad6af2792dacc236fe7@f6f58dc91bad4e24b9dd6f9a1ba19950@4f53be3edea541268b1b948456d6ff4e@ceffcfd7afee4553999b660982e45275@010abbafb641440ca25a5bd8f23ec477@b6fc2988ac6740f092a2ee3da40ebd74@674922141a014f13bdd882e8b5c15916@282db86a2e9b494d918563ed78125377@a977bcdcb8a2410b8a8db8c2826e05e7@5935fea0d65346adac6215bab9e1bcbb@8ab904ca73c74eb4a94206b87f5c3a99@4f205d80700c4591a1484b739503e4b7',
 ]
 let message = '', subTitle = '', option = {}, isFruitFinished = false;
-const retainWater = 50000;//保留水滴大于多少g,默认100g;
+const retainWater = 80000;//保留水滴大于多少g,默认100g;
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
 let jdFruitBeanCard = false;//农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
 let randomCount = $.isNode() ? 20 : 5;
@@ -693,7 +693,7 @@ async function masterHelpShare() {
       } else if ($.helpResult.helpResult.code === '9') {
         console.log(`【助力好友结果】: 之前给【${$.helpResult.helpResult.masterUserInfo.nickName}】助力过了`);
       } else if ($.helpResult.helpResult.code === '10') {
-        console.log(`【助力好友结果】: 好友【${$.helpResult.helpResult.masterUserInfo.nickName}】已满五人助力`);
+        console.log(`【助力好友结果】: 好友【${$.helpResult.helpResult.masterUserInfo.nickName}】已满9人助力`);
       } else {
         console.log(`助力其他情况：${JSON.stringify($.helpResult.helpResult)}`);
       }
@@ -1047,8 +1047,8 @@ async function gotStageAwardForFarm(type) {
 }
 //浇水API
 async function waterGoodForFarm() {
-  await $.wait(6000);
-  console.log('等待了6秒');
+  await $.wait(7000);
+  console.log('等待了7秒');
 
   const functionId = arguments.callee.name.toString();
   $.waterResult = await request(functionId);
@@ -1058,8 +1058,8 @@ async function initForTurntableFarm() {
   $.initForTurntableFarmRes = await request(arguments.callee.name.toString(), {version: 4, channel: 1});
 }
 async function lotteryForTurntableFarm() {
-  await $.wait(5000);
-  console.log('等待了5秒');
+  await $.wait(4000);
+  console.log('等待了4秒');
   $.lotteryRes = await request(arguments.callee.name.toString(), {type: 1, version: 4, channel: 1});
 }
 
