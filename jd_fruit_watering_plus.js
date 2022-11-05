@@ -455,8 +455,8 @@ async function doTenWaterAgain() {
        await initForFarm();
        totalEnergy  = $.farmInfo.farmUserPro.totalEnergy;
      }
-	await $.wait(1000);
-    	console.log('等待了1秒');	
+	await $.wait(3000);
+    	console.log('等待了3秒');	
             await waterGoodForFarm();
             console.log(`本次浇水结果(水果马上就可兑换了):   ${JSON.stringify($.waterResult)}`);
             if ($.waterResult.code === '0') {
@@ -1008,8 +1008,8 @@ async function gotStageAwardForFarm(type) {
 }
 //浇水API
 async function waterGoodForFarm() {
-    await $.wait(3000);
-    console.log('等待了3秒');
+    await $.wait(5000);
+    console.log('等待了5秒');
 
     const functionId = arguments.callee.name.toString();
     $.waterResult = await request(functionId);
